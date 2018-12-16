@@ -1,20 +1,23 @@
 from collections import namedtuple, defaultdict
-from urllib.request import urlretrieve
+import urllib
 import requests
+import os
+import pathlib
 from csv import DictReader
-from os import path, mkdir
 
 Movie = namedtuple('Movie', 'title year score')
 
-movies_csv = 'movies.csv'
-movie_data = 'https://raw.githubusercontent.com/pybites/challenges/solutions/13/movie_metadata.csv'
+URL = 'https://raw.githubusercontent.com/pybites/challenges/solutions/13/movie_metadata.csv'
+DIRECTORY = os.path.join(os.path.dirname(__file__), '..', 'tmp')
+MOVIES = os.path.join(DIRECTORY, 'movies.csv')
+
+pathlib.Path(DIRECTORY).mkdir(parents=True, exist_ok=True)
+urllib.request.urlretrieve(URL, MOVIES)
 
 
 def main():
     print_header()
-    full_path = get_full_path()
-    add_movies_to_local_file(full_path)
-    directors = get_movies_by_director(full_path)
+    directors = get_movies_by_director(MOVIES)
 
     output_movies(directors)
 
@@ -22,16 +25,6 @@ def main():
 def print_header():
     print('MOVIES RATING')
     print('==============')
-
-
-def add_movies_to_local_file(full_path):
-    if not path.exists(full_path):
-        with open(movies_csv, 'w') as fout:
-            urlretrieve(movie_data, full_path)
-
-
-def get_full_path():
-    return path.join(path.dirname(__file__), movies_csv)
 
 
 def get_movies_by_director(data):
