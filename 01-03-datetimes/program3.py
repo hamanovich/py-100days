@@ -6,7 +6,7 @@ import urllib.request
 
 SHUTDOWN_EVENT = 'Shutdown initiated'
 
-logfile = os.path.join(os.path.dirname(__file__), 'tmp', 'log')
+logfile = os.path.join(os.path.dirname(__file__), '..', 'tmp', 'log')
 
 urllib.request.urlretrieve('http://bit.ly/2AKSIbf', logfile)
 
