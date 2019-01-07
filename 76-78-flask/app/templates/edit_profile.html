@@ -1,11 +1,11 @@
 {% extends "base.html" %} {% block content %}
-<h1>Sign In</h1>
+<h1>Edit Profile</h1>
 <form 
   action="" 
   method="post" 
   novalidate
   {% if form.username.errors 
-  or form.password.errors %}
+  or form.about_me.errors %}
   class="was-validated"
   {% endif %}>
   {{ form.hidden_tag() }}
@@ -17,18 +17,11 @@
     {% endfor %}
   </div>
   <div class="form-group">
-    {{ form.password.label }}<br />
-    {{ form.password(size=32, class="form-control", placeholder="Type your password") }}
-    {% for error in form.password.errors %}
-    <div class="invalid-feedback">{{ error }}</div> 
-    {% endfor %}
-  </div>
-  <div class="form-group form-check">
-    {{ form.remember_me(class="form-check-input") }}
-    {{ form.remember_me.label }}
+    {{ form.about_me.label }}<br />
+    {{ form.about_me(cols=50, rows=4, class="form-control", placeholder="Introduce yourself") }}
+    {% for error in form.about_me.errors %}
+    <div class="invalid-feedback">{{ error }}</div> {% endfor %}
   </div>
   {{ form.submit(class="btn btn-primary") }}
 </form>
-<hr>
-<p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
 {% endblock %}

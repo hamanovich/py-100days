@@ -1,11 +1,12 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} 
+{% block content %}
 <h1>Python world</h1>
 <img
   src="{{url_for('static', filename='py.png')}}"
   alt="Python world"
   style="max-width: 15rem;"
 />
-<h1>Hi, {{ user.username }}!</h1>
+<h1>Hi, {{ current_user.username }}!</h1>
 {% for post in posts %}
 <dl>
   <dt>{{ post.author.username }} says:</dt>
